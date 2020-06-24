@@ -87,7 +87,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(process.env.SERVER_PORT, () => console.log(`Example app listening at http://localhost:${process.env.SERVER_PORT}`));
-mongoose.connect(process.env.DB_LOCAL, { 
+mongoose.connect(process.env.MONGODB_URI, { 
   useCreateIndex: true, 
   useNewUrlParser: true, 
   useFindAndModify: false, 
