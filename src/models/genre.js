@@ -8,5 +8,12 @@ const genreSchema = mongoose.Schema({
     }
 });
 
+genreSchema.methods.toJSON = function () {
+    const genre = this;
+    const genreObject = genre.toObject();
+    delete genreObject.__v;
+    return genreObject;
+}
+
 const Genre = mongoose.model("Genre", genreSchema);
 module.exports = Genre;

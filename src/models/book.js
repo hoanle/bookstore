@@ -21,7 +21,7 @@ const bookSchema = new mongoose.Schema({
         type: Array
     }
 })
-
+  
 bookSchema.pre("save", async function (next) {
     console.log(`pre save book ${this.author}`);
     console.log(`pre save ${this.genres}`);
@@ -37,6 +37,13 @@ bookSchema.pre("save", async function (next) {
     this.genres = (await Promise.all(promises)).filter(Boolean);
     next();
 });
+
+bookSchema.methods.toJSON = function () {
+    const book = this;
+    const bookObject = book.toObject();
+    delete bookObject.__v;
+    return bookObject;
+}
 
 const Book = mongoose.model("Book", bookSchema);
 module.exports = Book;

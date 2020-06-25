@@ -14,5 +14,12 @@ const authorSchema = mongoose.Schema({
   }
 });
 
+authorSchema.methods.toJSON = function () {
+  const author = this;
+  const authorObject = author.toObject();
+  delete authorObject.__v;
+  return authorObject;
+}
+
 const Author = mongoose.model("Author", authorSchema);
 module.exports = Author;
